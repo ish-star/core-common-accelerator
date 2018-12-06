@@ -1,4 +1,4 @@
-﻿namespace NxtLvl.Core.Common.Tests
+﻿namespace NxtLvl.Core.Common.Tests.TestObjects
 {
     internal class ObjectWithNullableProperty
     {

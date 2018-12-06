@@ -1,5 +1,6 @@
 ﻿using System;
 using Xunit;
+using NxtLvl.Core.Common.Tests.TestObjects;
 
 namespace NxtLvl.Core.Common.Tests
 {
