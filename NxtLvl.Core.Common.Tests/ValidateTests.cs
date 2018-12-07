@@ -38,7 +38,7 @@ namespace NxtLvl.Core.Common.Tests
             {
                 var ex = Assert.Throws<ArgumentException>(() => Validate.PropertyHasValue(testObject.NullableValue, nameof(testObject.NullableValue)));
 
-                Assert.Equal("Value cannot be null.\r\nProperty name name: NullableValue", ex.Message);
+                Assert.Equal("Value cannot be null.\r\nProperty name: NullableValue", ex.Message);
                 return;
             }
 

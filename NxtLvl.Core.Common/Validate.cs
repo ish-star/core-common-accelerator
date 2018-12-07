@@ -18,7 +18,7 @@ namespace NxtLvl.Core.Common
         {
             if (property == null)
             {
-                throw new ArgumentException($"Value cannot be null.{Environment.NewLine}Property name name: {nameof}");
+                throw new ArgumentException($"Value cannot be null.{Environment.NewLine}Property name: {nameof}");
             }
         }
 
