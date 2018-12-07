@@ -14,6 +14,14 @@ namespace NxtLvl.Core.Common
             }
         }
 
+        public static void PropertyHasValue<TNullableProperty>(TNullableProperty property, string nameof)
+        {
+            if (property == null)
+            {
+                throw new ArgumentException($"Value cannot be null.{Environment.NewLine}Property name: {nameof}");
+            }
+        }
+
         public static void ArgumentIsNotNullOrEmpty(string argument, string nameof)
         {
             if (argument.IsNullOrWhiteSpace())

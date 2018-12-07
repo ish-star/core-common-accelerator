@@ -1,5 +1,6 @@
 ﻿using System;
 using Xunit;
+using NxtLvl.Core.Common.Tests.TestObjects;
 
 namespace NxtLvl.Core.Common.Tests
 {
@@ -21,6 +22,27 @@ namespace NxtLvl.Core.Common.Tests
             }
 
             Validate.ArgumentIsNotNull(testArgument, nameof(testArgument));
+        }
+
+        [Theory]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        public void Validate_PropertyHasValue(bool initializeProperty, bool exceptionExpected)
+        {
+            var testObject = new ObjectWithNullableProperty();
+
+            if (initializeProperty)
+                testObject.NullableValue = 1;   
+            
+            if (exceptionExpected)
+            {
+                var ex = Assert.Throws<ArgumentException>(() => Validate.PropertyHasValue(testObject.NullableValue, nameof(testObject.NullableValue)));
+
+                Assert.Equal("Value cannot be null.\r\nProperty name: NullableValue", ex.Message);
+                return;
+            }
+
+            Validate.PropertyHasValue(testObject.NullableValue, nameof(testObject.NullableValue));
         }
 
         [Theory]
