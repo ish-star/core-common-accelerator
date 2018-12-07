@@ -4,16 +4,16 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>A set of common code elements and extensions that accelerate the development of code by encapsulating common .NET code routines, built for .NET Core.</Description>
-    <PackageReleaseNotes>This was a small limited release adding the one string extension and 2 argument validation methods to enable proper argument validation for the Azure Data Accelerator project and I wanted to start that project off in a solid manner with proper nuget package dependencies for ease of evolution later.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed a redundant word issue in the exception message produced by the PropertyHasValue() method.</PackageReleaseNotes>
     <Authors>Michael Griehm</Authors>
     <Company>ISH-STAR Enterprises LLC</Company>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
     <PackageLicenseUrl>https://github.com/ish-star/core-common-accelerator/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/ish-star/core-common-accelerator/projects</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ish-star/core-common-accelerator</RepositoryUrl>
     <PackageTags>.NET Core</PackageTags>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
 </Project>
