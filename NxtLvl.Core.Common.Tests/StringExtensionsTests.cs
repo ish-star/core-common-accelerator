@@ -1,4 +1,4 @@
-using NxtLvl.Core.Common.StringExtensions;
+﻿using NxtLvl.Core.Common.StringExtensions;
 using System;
 using Xunit;
 
@@ -163,6 +163,123 @@ namespace NxtLvl.Core.Common.Tests
             else
             {
                 var result = value.ToLong();
+
+                Assert.Equal(expected, result);
+            }
+        }
+
+        [Theory]
+        [InlineData(null, null, null, 0, null)]
+        [InlineData("", null, null, 0, null)]
+        [InlineData(" ", null, null, 0, null)]
+        [InlineData(null, 1, null, 1, null)]
+        [InlineData("", 1, null, 1, null)]
+        [InlineData(" ", 1, null, 1, null)]
+        [InlineData(null, null, true, 0, null)]
+        [InlineData("", null, true, 0, null)]
+        [InlineData(" ", null, true, 0, null)]
+        [InlineData("1.00", null, null, 1, null)]
+        [InlineData("-1.00", null, null, -1, null)]
+        [InlineData("0", null, null, 0, null)]
+        [InlineData("‎79228162514264337593543950336", null, null, null, true)]
+        [InlineData("-‎79228162514264337593543950337", null, null, null, true)]
+        [InlineData("NaN", null, null, null, true)]
+        public void StringExtensions_ToDecimal(string value, int? defaultValue, bool? throwInsteadOfDefault, int? expected, bool? formatExceptionExpected)
+        {
+            var defaultValueDecimal = (decimal?)defaultValue;
+            var expectedDecimal = (decimal?)expected;
+
+            if (throwInsteadOfDefault.HasValue && throwInsteadOfDefault.Value)
+            {
+                var ex = Assert.Throws<ArgumentException>(() => value.ToDecimal(throwInsteadOfDefault: throwInsteadOfDefault.Value));
+
+                Assert.Equal($"The provided value '{value}' could not be converted to a decimal value becuase it is null, empty, or whitespace.", ex.Message);
+                return;
+            }
+
+            if (formatExceptionExpected.HasValue && formatExceptionExpected.Value)
+            {
+                var ex = Assert.Throws<FormatException>(() => value.ToDecimal());
+
+                Assert.Equal($"The provided value '{value}' could not be converted to a decimal value because it is not in the correct format.", ex.Message);
+                return;
+            }
+
+            if (defaultValueDecimal.HasValue)
+            {
+                var result = value.ToDecimal(defaultValue: defaultValueDecimal.Value);
+
+                Assert.Equal(expectedDecimal, result);
+            }
+            else
+            {
+                var result = value.ToDecimal();
+
+                Assert.Equal(expectedDecimal, result);
+            }
+        }
+
+        [Fact]
+        public void StringExtensions_ToDecimal_MaxValue()
+        {
+            var value = decimal.MaxValue.ToString();
+
+            var result = value.ToDecimal();
+
+            Assert.Equal(decimal.MaxValue, result);
+        }
+
+        [Fact]
+        public void StringExtensions_ToDecimal_MinValue()
+        {
+            var value = decimal.MinValue.ToString();
+
+            var result = value.ToDecimal();
+
+            Assert.Equal(decimal.MinValue, result);
+        }
+
+        [Theory]
+        [InlineData(null, null, null, 0, null)]
+        [InlineData("", null, null, 0, null)]
+        [InlineData(" ", null, null, 0, null)]
+        [InlineData(null, 1, null, 1, null)]
+        [InlineData("", 1, null, 1, null)]
+        [InlineData(" ", 1, null, 1, null)]
+        [InlineData(null, null, true, 0, null)]
+        [InlineData("", null, true, 0, null)]
+        [InlineData(" ", null, true, 0, null)]
+        [InlineData("1.1", null, null, 1.1, null)]
+        [InlineData("-1.1", null, null, -1.1, null)]
+        [InlineData("0", null, null, 0, null)]
+        [InlineData("Hi", null, null, null, true)]
+        public void StringExtensions_ToDouble(string value, double? defaultValue, bool? throwInsteadOfDefault, double? expected, bool? formatExceptionExpected)
+        {
+            if (throwInsteadOfDefault.HasValue && throwInsteadOfDefault.Value)
+            {
+                var ex = Assert.Throws<ArgumentException>(() => value.ToDouble(throwInsteadOfDefault: throwInsteadOfDefault.Value));
+
+                Assert.Equal($"The provided value '{value}' could not be converted to a double value becuase it is null, empty, or whitespace.", ex.Message);
+                return;
+            }
+
+            if (formatExceptionExpected.HasValue && formatExceptionExpected.Value)
+            {
+                var ex = Assert.Throws<FormatException>(() => value.ToDouble());
+
+                Assert.Equal($"The provided value '{value}' could not be converted to a double value because it is not in the correct format.", ex.Message);
+                return;
+            }
+
+            if (defaultValue.HasValue)
+            {
+                var result = value.ToDouble(defaultValue: defaultValue.Value);
+
+                Assert.Equal(expected, result);
+            }
+            else
+            {
+                var result = value.ToDouble();
 
                 Assert.Equal(expected, result);
             }

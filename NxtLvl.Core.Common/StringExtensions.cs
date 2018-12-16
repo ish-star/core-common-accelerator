@@ -106,5 +106,65 @@ namespace NxtLvl.Core.Common.StringExtensions
 
             return result;
         }
+
+        /// <summary>
+        /// Converts the string value to a decimal value if possible.
+        /// </summary>
+        /// <param name="value">The string value to convert.</param>
+        /// <param name="defaultValue">The default value if the value is null, empty, or whitespace.</param>
+        /// <param name="throwInsteadOfDefault">Throw an exception instead of providing a default return if the value is null, empty, or whitespace.</param>
+        /// <returns>The long value representation of the original string value.</returns>
+        /// <exception cref="System.FormatException">Thrown when the string value cannot be converted into a decimal value.</exception>
+        public static decimal ToDecimal(this string value, decimal defaultValue = 0, bool throwInsteadOfDefault = false)
+        {
+            if (value.IsNullOrWhiteSpace())
+            {
+                if (throwInsteadOfDefault)
+                {
+                    throw new ArgumentException($"The provided value '{value}' could not be converted to a decimal value becuase it is null, empty, or whitespace.");
+                }
+
+                return defaultValue;
+            }
+
+            decimal result;
+
+            if (!decimal.TryParse(value, out result))
+            {
+                throw new FormatException($"The provided value '{value}' could not be converted to a decimal value because it is not in the correct format.");
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the string value to a double value if possible.
+        /// </summary>
+        /// <param name="value">The string value to convert.</param>
+        /// <param name="defaultValue">The default value if the value is null, empty, or whitespace.</param>
+        /// <param name="throwInsteadOfDefault">Throw an exception instead of providing a default return if the value is null, empty, or whitespace.</param>
+        /// <returns>The long value representation of the original string value.</returns>
+        /// <exception cref="System.FormatException">Thrown when the string value cannot be converted into a double value.</exception>
+        public static double ToDouble(this string value, double defaultValue = 0, bool throwInsteadOfDefault = false)
+        {
+            if (value.IsNullOrWhiteSpace())
+            {
+                if (throwInsteadOfDefault)
+                {
+                    throw new ArgumentException($"The provided value '{value}' could not be converted to a double value becuase it is null, empty, or whitespace.");
+                }
+
+                return defaultValue;
+            }
+
+            double result;
+
+            if (!double.TryParse(value, out result))
+            {
+                throw new FormatException($"The provided value '{value}' could not be converted to a double value because it is not in the correct format.");
+            }
+
+            return result;
+        }
     }
 }
